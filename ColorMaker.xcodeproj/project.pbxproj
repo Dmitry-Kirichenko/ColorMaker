@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FB36DFCA250FB49B004F5B41 /* Make Your Color.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Make Your Color.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB36DFCA250FB49B004F5B41 /* ColorMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB36DFCD250FB49B004F5B41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB36DFCF250FB49B004F5B41 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FB36DFD1250FB49B004F5B41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		FB36DFCB250FB49B004F5B41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB36DFCA250FB49B004F5B41 /* Make Your Color.app */,
+				FB36DFCA250FB49B004F5B41 /* ColorMaker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FB36DFC9250FB49B004F5B41 /* Make Your Color */ = {
+		FB36DFC9250FB49B004F5B41 /* ColorMaker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB36DFDE250FB49E004F5B41 /* Build configuration list for PBXNativeTarget "Make Your Color" */;
+			buildConfigurationList = FB36DFDE250FB49E004F5B41 /* Build configuration list for PBXNativeTarget "ColorMaker" */;
 			buildPhases = (
 				FB36DFC6250FB49B004F5B41 /* Sources */,
 				FB36DFC7250FB49B004F5B41 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = "Make Your Color";
+			name = ColorMaker;
 			productName = "Make Your Color";
-			productReference = FB36DFCA250FB49B004F5B41 /* Make Your Color.app */;
+			productReference = FB36DFCA250FB49B004F5B41 /* ColorMaker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FB36DFC5250FB49A004F5B41 /* Build configuration list for PBXProject "Make Your Color" */;
+			buildConfigurationList = FB36DFC5250FB49A004F5B41 /* Build configuration list for PBXProject "ColorMaker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FB36DFC9250FB49B004F5B41 /* Make Your Color */,
+				FB36DFC9250FB49B004F5B41 /* ColorMaker */,
 			);
 		};
 /* End PBXProject section */
@@ -319,7 +319,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FB36DFC5250FB49A004F5B41 /* Build configuration list for PBXProject "Make Your Color" */ = {
+		FB36DFC5250FB49A004F5B41 /* Build configuration list for PBXProject "ColorMaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB36DFDC250FB49E004F5B41 /* Debug */,
@@ -328,7 +328,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FB36DFDE250FB49E004F5B41 /* Build configuration list for PBXNativeTarget "Make Your Color" */ = {
+		FB36DFDE250FB49E004F5B41 /* Build configuration list for PBXNativeTarget "ColorMaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB36DFDF250FB49E004F5B41 /* Debug */,
