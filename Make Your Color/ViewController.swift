@@ -8,12 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
 
-    @IBOutlet var topLabel: UILabel!
-    @IBOutlet var redLabel: UILabel!
-    @IBOutlet var greenLabel: UILabel!
-    @IBOutlet var blueLabel: UILabel!
+  
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
@@ -33,75 +30,138 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // View setup
         finalColor.layer.cornerRadius = 15
-        finalColor.backgroundColor = .white
         
         // Slider's setup
-        redSlider.minimumTrackTintColor = .red
-        greenSlider.minimumTrackTintColor = .green
-        blueSlider.minimumTrackTintColor = .blue
+        redSlider.tintColor = .red
+        greenSlider.tintColor = .green
         
-        // Text Field setup
-        redTextField.placeholder = "1.00"
-        greenTextField.placeholder = "1.00"
-        blueTextField.placeholder = "1.00"
+        setColor()
+        setValueForLabel()
+        setValueForTextField()
         
-        //Create toolbar and "Done" button
-        let toolBar = UIToolbar()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneButtonTapped))
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        toolBar.sizeToFit()
-        toolBar.setItems([flexibleSpace, doneButton], animated: false)
-        
-        redTextField.inputAccessoryView = toolBar
-        greenTextField.inputAccessoryView = toolBar
-        blueTextField.inputAccessoryView = toolBar
-        
+        addDoneButtonTo(redTextField)
+        addDoneButtonTo(greenTextField)
+        addDoneButtonTo(blueTextField)
+    
     }
 
+    // Change colors with sliders
+    @IBAction func rgbSlider(_ sender: UISlider) {
+        
+        switch sender.tag {
+        case 0:
+            redValueLabel.text = string(from: sender)
+            redTextField.text = string(from: sender)
+        case 1:
+            greenValueLabel.text = string(from: sender)
+            greenTextField.text = string(from: sender)
+        case 2:
+            blueValueLabel.text = string(from: sender)
+            blueTextField.text = string(from: sender)
+        default:
+            break
+        }
+        
+        setColor()
+    }
+    
+    // Color of view
+    private func setColor() {
+        finalColor.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                             green: CGFloat(greenSlider.value),
+                                             blue: CGFloat(blueSlider.value),
+                                             alpha: 1)
+    }
+    
+    // String value of RGB
+    private func string(from slider: UISlider) -> String {
+        return String(format: "%.2f", slider.value)
+    }
+    
+    private func setValueForLabel() {
+        redValueLabel.text = string(from: redSlider)
+        greenValueLabel.text = string(from: greenSlider)
+        blueValueLabel.text = string(from: blueSlider)
+    }
+    
+    private func setValueForTextField() {
+        redTextField.text = string(from: redSlider)
+        greenTextField.text = string(from: greenSlider)
+        blueTextField.text = string(from: blueSlider)
+    }
+    
+}
+
+extension ViewController: UITextFieldDelegate {
+    
+    // Hides the keyboard when the "Done" button is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Hides keyboard on tap outside Text View area
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        doneButtonTapped()
-    }
-    
-    @IBAction func slidersAction() {
-        let redValue = CGFloat(redSlider.value)
-        let greenValue = CGFloat(greenSlider.value)
-        let blueValue = CGFloat(blueSlider.value)
-
-        finalColor.backgroundColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1)
-        
-        redValueLabel.text = String(format: "%.2f", redValue)
-        greenValueLabel.text = String(format: "%.2f", greenValue)
-        blueValueLabel.text = String(format: "%.2f", blueValue)
-        
-        redTextField.text = redValueLabel.text
-        greenTextField.text = greenValueLabel.text
-        blueTextField.text = blueValueLabel.text
-    }
-    
-    
-    @objc func doneButtonTapped() {
+        super.touchesBegan(touches, with: event)
         
         view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard let redValueText = redTextField.text, !redValueText.isEmpty else { return }
-        guard let greenValueText = greenTextField.text, !greenValueText.isEmpty else { return }
-        guard let blueValueText = blueTextField.text, !blueValueText.isEmpty else { return }
+        guard let text = textField.text else { return }
         
-        if let redValue = Float(redValueText){
-            redSlider.value = redValue
-            slidersAction()
-        }
-        if let greenValue = Float(greenValueText){
-            greenSlider.value = greenValue
-            slidersAction()
-        }
-        if let blueValue = Float(blueValueText){
-            blueSlider.value = blueValue
-            slidersAction()
+        if let currentValue = Float(text) {
+            
+            switch textField.tag {
+            case 0: redSlider.value = currentValue
+            case 1: greenSlider.value = currentValue
+            case 2: blueSlider.value = currentValue
+            default: break
+            }
+            
+            setColor()
+            setValueForLabel()
+        } else {
+            showAlert(title: "Wrong format",
+                      message: "Please enter correct value")
         }
     }
 }
- 
+
+extension ViewController {
+    
+    // Add "Done" button on keyboard
+    private func addDoneButtonTo(_ textField: UITextField) {
+        
+        let keyboardToolbar = UIToolbar()
+        textField.inputAccessoryView = keyboardToolbar
+        keyboardToolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(didTapDone))
+        
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                            target: nil,
+                                            action: nil)
+        
+        keyboardToolbar.items = [flexBarButton, doneButton]
+    }
+    
+    @objc private func didTapDone() {
+        view.endEditing(true)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+
+    }
+}
