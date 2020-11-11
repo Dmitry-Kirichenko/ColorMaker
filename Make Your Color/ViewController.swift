@@ -25,11 +25,16 @@ class ViewController: UIViewController {
     
     @IBOutlet var finalColor: UIView!
     
+    @IBOutlet var doneButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // View setup
         finalColor.layer.cornerRadius = 15
+        
+        //Button setup
+        doneButton.layer.cornerRadius = 10
         
         // Slider's setup
         redSlider.tintColor = .red
