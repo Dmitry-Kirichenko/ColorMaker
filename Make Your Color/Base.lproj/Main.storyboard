@@ -4,27 +4,25 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Set color-->
         <scene sceneID="atA-jJ-Bt5">
             <objects>
-                <viewController id="ZWN-yd-krT" sceneMemberID="viewController">
+                <viewController id="ZWN-yd-krT" customClass="FirstViewController" customModule="ColorMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wzD-W9-PzC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="xfb-3N-1gW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="e3q-HY-OnM">
-                        <barButtonItem key="rightBarButtonItem" id="Ss5-d4-61Y">
-                            <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
+                    <navigationItem key="navigationItem" title="Set color" id="e3q-HY-OnM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Ss5-d4-61Y">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="B2V-mp-v6Z"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="E1F-e0-6ar"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -33,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="345" y="117"/>
         </scene>
-        <!--View Controller-->
+        <!--Second View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="ColorMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="SecondViewController" customModule="ColorMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,13 +104,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="wWs-M7-dEo">
                                         <rect key="frame" x="106" y="2" width="195" height="114"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kkR-Dt-Okm">
+                                            <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kkR-Dt-Okm" userLabel="Red Slider">
                                                 <rect key="frame" x="-2" y="0.0" width="199" height="31"/>
                                                 <connections>
                                                     <action selector="rgbSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="IcJ-wZ-FVH"/>
                                                 </connections>
                                             </slider>
-                                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XaZ-jp-sDx">
+                                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XaZ-jp-sDx" userLabel="Green Slider">
                                                 <rect key="frame" x="-2" y="42" width="199" height="31"/>
                                                 <connections>
                                                     <action selector="rgbSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="gT6-Ij-DUB"/>
@@ -186,6 +184,10 @@
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H17-Tk-ptW"/>
+                                    <segue destination="wlu-qP-D8w" kind="unwind" unwindAction="unwindSegueWithSegue:" id="CrS-YU-Lt4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -209,7 +211,7 @@
                         <outlet property="blueValueLabel" destination="TB2-oy-evA" id="uy4-x6-Cee"/>
                         <outlet property="doneButton" destination="NS3-KG-Img" id="P41-5P-3dD"/>
                         <outlet property="finalColor" destination="gRn-8R-GSj" id="pAW-eK-yXR"/>
-                        <outlet property="greenSlider" destination="kkR-Dt-Okm" id="hz9-s5-E8i"/>
+                        <outlet property="greenSlider" destination="XaZ-jp-sDx" id="V39-WD-LyO"/>
                         <outlet property="greenTextField" destination="uwr-67-Bvv" id="owN-e0-lRX"/>
                         <outlet property="greenValueLabel" destination="sie-ZU-oaX" id="S19-wF-ZDa"/>
                         <outlet property="redSlider" destination="kkR-Dt-Okm" id="YGb-9w-tYO"/>
@@ -218,6 +220,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="wlu-qP-D8w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="117.1875"/>
         </scene>
@@ -241,7 +244,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

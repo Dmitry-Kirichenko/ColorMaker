@@ -9,8 +9,7 @@
 import UIKit
 
 class SecondViewController: UIViewController {
-
-  
+    
     @IBOutlet var redValueLabel: UILabel!
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
@@ -27,6 +26,9 @@ class SecondViewController: UIViewController {
     
     @IBOutlet var doneButton: UIButton!
     
+    var delegate: ColorDelegate?
+    var colorFromFirstVC: UIColor!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,16 +42,20 @@ class SecondViewController: UIViewController {
         redSlider.tintColor = .red
         greenSlider.tintColor = .green
         
-        setColor()
+        finalColor.backgroundColor = colorFromFirstVC
+        
+        setValueForSlider()
         setValueForLabel()
         setValueForTextField()
         
         addDoneButtonTo(redTextField)
         addDoneButtonTo(greenTextField)
         addDoneButtonTo(blueTextField)
-    
+        
+            
     }
-
+    
+    
     // Change colors with sliders
     @IBAction func rgbSlider(_ sender: UISlider) {
         
@@ -70,12 +76,17 @@ class SecondViewController: UIViewController {
         setColor()
     }
     
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
     // Color of view
-    private func setColor() {
-        finalColor.backgroundColor = UIColor(red: CGFloat(redSlider.value),
-                                             green: CGFloat(greenSlider.value),
-                                             blue: CGFloat(blueSlider.value),
-                                             alpha: 1)
+    func setColor() {
+        let newColor = UIColor(red: CGFloat(redSlider.value),
+                               green: CGFloat(greenSlider.value),
+                               blue: CGFloat(blueSlider.value),
+                               alpha: 1)
+        finalColor.backgroundColor = newColor
+        delegate?.setColor(newColor)
     }
     
     // String value of RGB
@@ -93,6 +104,14 @@ class SecondViewController: UIViewController {
         redTextField.text = string(from: redSlider)
         greenTextField.text = string(from: greenSlider)
         blueTextField.text = string(from: blueSlider)
+    }
+    
+    private func setValueForSlider() {
+        let ciColor = CIColor(color: colorFromFirstVC)
+        
+        redSlider.value = Float(ciColor.red)
+        greenSlider.value = Float(ciColor.green)
+        blueSlider.value = Float(ciColor.blue)
     }
     
 }
